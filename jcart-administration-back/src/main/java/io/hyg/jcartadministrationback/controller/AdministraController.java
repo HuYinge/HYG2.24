@@ -16,14 +16,13 @@ public class AdministraController {
 
 
     }
-    @PostMapping("/getProfile")
-    public AdministratorGetProfileOutDTO getProfile(Integer adminstratorId){
+    @GetMapping("/getProfile")
+    public AdministratorGetProfileOutDTO getProfile(@RequestParam(required = false) Integer adminstratorId){
 
         return null;
     }
     @PostMapping("/updateProdfile")
     public void updateProdfile(@RequestBody AdministratorUpdateProfileInDTO administratorUpdateProfileInDTO){
-
 
 
     }
