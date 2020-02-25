@@ -7,6 +7,8 @@ import io.hyg.jcartadministrationback.dto.out.AdministratorShowOutDTO;
 import io.hyg.jcartadministrationback.dto.out.PageOutDTO;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/administrator")
 public class AdministraController {
@@ -60,6 +62,16 @@ public class AdministraController {
     //修改数据库
     @PostMapping("/update")
     public void update(@RequestBody AdministratorUpdateInDTO administratorUpdateInDTO){
+
+    }
+
+    @PostMapping("/delete")
+    public void delete(@RequestBody Integer adminstratorId){
+
+    }
+
+    @PostMapping("/batchDelete")
+    public void batchDelete(@RequestBody List<Integer> administratorIds){
 
     }
 
