@@ -4,18 +4,11 @@ import java.util.List;
 
 public class PageOutDTO<T> {
 
-    private Integer total;
+    private Long total;
     private Integer pageSize;
     private Integer pageNum;
     private List<T> list;
 
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
 
     public Integer getPageSize() {
         return pageSize;
@@ -39,5 +32,13 @@ public class PageOutDTO<T> {
 
     public void setList(List<T> list) {
         this.list = list;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
     }
 }

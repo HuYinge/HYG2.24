@@ -1,5 +1,6 @@
 package io.hyg.jcartadministrationback.controller;
 
+import com.github.pagehelper.Page;
 import io.hyg.jcartadministrationback.dto.in.ProductCreateInDTO;
 import io.hyg.jcartadministrationback.dto.in.ProductSearchInDTO;
 import io.hyg.jcartadministrationback.dto.in.ProductUpdateInDTO;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product")
+@CrossOrigin
 public class ProductController {
 
     @Autowired
@@ -21,23 +23,28 @@ public class ProductController {
 
     @GetMapping("/search")
     public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
-                                                @RequestParam Integer pageNum){
+                                                @RequestParam(required = false, defaultValue = "1") Integer pageNum){
+        Page<ProductListOutDTO> page = productService.search(pageNum);
 
+        PageOutDTO<ProductListOutDTO> pageOutDTO = new PageOutDTO<>();
+        pageOutDTO.setTotal(page.getTotal());
+        pageOutDTO.setPageSize(page.getPageSize());
+        pageOutDTO.setPageNum(page.getPageNum());
+        pageOutDTO.setList(page);
 
-
-
-        return null;
+        return pageOutDTO;
     }
-
     @GetMapping("/getById")
     public ProductShowOutDTO getById(@RequestParam Integer productId){
-        return null;
+        ProductShowOutDTO productShowOutDTO = productService.getById(productId);
+        return productShowOutDTO;
     }
 
     @PostMapping("/create")
     public Integer create(@RequestBody ProductCreateInDTO productCreateInDTO){
 
-        return productService.create(productCreateInDTO);
+        Integer productId = productService.create(productCreateInDTO);
+        return productId;
     }
 
     @PostMapping("/update")
