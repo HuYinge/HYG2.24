@@ -24,7 +24,7 @@
     delete from jcart_address
     where address_id = #{addressId,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="io.cjf.jcartstoreback.po.Address">
+    <insert id="insert" parameterType="io.hyg.jcartstoreback.po.Address">
     insert into jcart_address (address_id, customer_id, receiver_name,
       receiver_mobile, content, tag
       )
@@ -32,7 +32,7 @@
       #{receiverMobile,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}
       )
   </insert>
-    <insert id="insertSelective" parameterType="io.cjf.jcartstoreback.po.Address" useGeneratedKeys="true" keyProperty="addressId">
+    <insert id="insertSelective" parameterType="io.hyg.jcartstoreback.po.Address" useGeneratedKeys="true" keyProperty="addressId">
         insert into jcart_address
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="customerId != null">
@@ -69,7 +69,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="io.cjf.jcartstoreback.po.Address">
+    <update id="updateByPrimaryKeySelective" parameterType="io.hyg.jcartstoreback.po.Address">
         update jcart_address
         <set>
             <if test="customerId != null">
@@ -90,7 +90,7 @@
         </set>
         where address_id = #{addressId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="io.cjf.jcartstoreback.po.Address">
+    <update id="updateByPrimaryKey" parameterType="io.hyg.jcartstoreback.po.Address">
     update jcart_address
     set customer_id = #{customerId,jdbcType=INTEGER},
       receiver_name = #{receiverName,jdbcType=VARCHAR},
