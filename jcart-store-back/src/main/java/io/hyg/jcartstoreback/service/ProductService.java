@@ -7,6 +7,7 @@ import io.hyg.jcartstoreback.dto.out.ProductShowOutDTO;
 public interface ProductService {
     ProductShowOutDTO getById(Integer productId);
 
+    //Page<ProductListOutDTO> search(Integer pageNum);
     Page<ProductListOutDTO> search(Integer pageNum);
 
 

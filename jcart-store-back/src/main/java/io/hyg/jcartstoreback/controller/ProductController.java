@@ -17,7 +17,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/search")
+  /*  @GetMapping("/search")
     public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
                                                 @RequestParam(required = false, defaultValue = "1") Integer pageNum){
         Page<ProductListOutDTO> page = productService.search(pageNum);
@@ -28,7 +28,20 @@ public class ProductController {
         pageOutDTO.setList(page);
 
         return pageOutDTO;
-    }
+    }*/
+
+  @GetMapping("/search")
+  public PageOutDTO<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
+
+                                                @RequestParam(required = false,defaultValue = "1")Integer pageNum){
+      Page<ProductListOutDTO> page = productService.search(pageNum);
+      PageOutDTO<ProductListOutDTO> pageOutDTO = new PageOutDTO<>();
+      pageOutDTO.setTotal(page.getTotal());
+      pageOutDTO.setPageSize(page.getPageSize());
+      pageOutDTO.setPageNum(page.getPageNum());
+      pageOutDTO.setList(page);
+      return pageOutDTO;
+  }
 
     @GetMapping("/getById")
     public ProductShowOutDTO getById(@RequestParam Integer productId){

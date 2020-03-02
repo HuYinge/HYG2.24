@@ -19,7 +19,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductMapper productMapper;
-
     @Autowired
     private ProductDetailMapper productDetailMapper;
 
@@ -49,8 +48,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<ProductListOutDTO> search(Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        Page<ProductListOutDTO> page = productMapper.search();
+        return page;
+
+    }
+
+    //@Override
+   /* public Page<ProductListOutDTO> search(Integer pageNum) {
         PageHelper.startPage(pageNum, 10);
         Page<ProductListOutDTO> page = productMapper.search();
         return page;
-    }
+
+    }*/
 }
