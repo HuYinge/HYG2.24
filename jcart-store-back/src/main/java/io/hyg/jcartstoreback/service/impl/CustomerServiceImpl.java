@@ -7,9 +7,10 @@ import io.hyg.jcartstoreback.enumeration.CustomerStatus;
 import io.hyg.jcartstoreback.po.Customer;
 import io.hyg.jcartstoreback.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
-
+@Service
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired

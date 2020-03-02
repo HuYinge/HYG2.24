@@ -70,5 +70,4 @@ public class JWTUtil {
         customerLoginVO.setUsername(jwt.getSubject());
         return customerLoginVO;
     }
-
 }
