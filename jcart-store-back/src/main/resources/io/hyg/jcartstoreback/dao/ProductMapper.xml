@@ -27,6 +27,12 @@
     product_id, product_code, product_name, product_abstract, price, discount, stock_quantity, 
     status, main_pic_url, reword_points, sort_order
   </sql>
+  <select id="search" resultMap="ProductListOutDTO">
+    select
+    <include refid="Base_Column_List"/>
+    from jcart_product
+    where status = 1
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -172,10 +178,11 @@
   </update>
 
 <!--  custom-->
-  <select id="search" resultMap="ProductListOutDTO">
+ <!-- <select id="search" resultMap="ProductListOutDTO">
     select
     <include refid="Base_Column_List" />
     from jcart_product
     where status = 1
-  </select>
+  </select>-->
+
 </mapper>
