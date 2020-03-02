@@ -10,9 +10,8 @@ public class AdministratorGetProfileOutDTO {
 
     private String avatarUrl;
 
-    private Byte status;
-
     private Long createTimestamp;
+    private String realName;
 
     public Integer getAdministratorId() {
         return administratorId;
@@ -46,19 +45,19 @@ public class AdministratorGetProfileOutDTO {
         this.avatarUrl = avatarUrl;
     }
 
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
-
     public Long getCreateTimestamp() {
         return createTimestamp;
     }
 
     public void setCreateTimestamp(Long createTimestamp) {
         this.createTimestamp = createTimestamp;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }
