@@ -4,6 +4,7 @@ public class AdministratorShowOutDTO {
 
     private Integer administratorId;
     private String username;
+    private String realName;
     private String email;
     private String avatarUrl;
     private Byte status;
@@ -46,5 +47,13 @@ public class AdministratorShowOutDTO {
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }

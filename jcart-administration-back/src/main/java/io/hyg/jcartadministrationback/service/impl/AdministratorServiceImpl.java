@@ -1,9 +1,13 @@
 package io.hyg.jcartadministrationback.service.impl;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.hyg.jcartadministrationback.dao.AdministratorMapper;
 import io.hyg.jcartadministrationback.po.Administrator;
 import io.hyg.jcartadministrationback.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AdministratorServiceImpl implements AdministratorService {
@@ -31,5 +35,32 @@ public class AdministratorServiceImpl implements AdministratorService {
     public void update(Administrator administrator) {
         administratorMapper.updateByPrimaryKeySelective(administrator);
 
+    }
+
+    @Override
+    public void delete(Integer administratorId) {
+
+        administratorMapper.deleteByPrimaryKey(administratorId);
+    }
+
+    @Override
+    public void batchDelete(List<Integer> administratorIds) {
+
+        administratorMapper.batchDelete(administratorIds);
+    }
+
+    @Override
+    public Page<Administrator> getList(Integer pageNum) {
+        PageHelper.startPage(pageNum ,10);
+        Page<Administrator> page = administratorMapper.selectList();
+
+        return page;
+    }
+
+    @Override
+    public Integer create(Administrator administrator) {
+        administratorMapper.insertSelective(administrator);
+        Integer administratorId = administrator.getAdministratorId();
+        return administratorId;
     }
 }
