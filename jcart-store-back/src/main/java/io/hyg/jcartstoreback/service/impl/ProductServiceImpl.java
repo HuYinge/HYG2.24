@@ -17,13 +17,21 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+
     @Autowired
     private ProductMapper productMapper;
+
     @Autowired
     private ProductDetailMapper productDetailMapper;
 
     @Override
-    public ProductShowOutDTO getById(Integer productId) {
+    public Product getById(Integer productId) {
+        Product product = productMapper.selectByPrimaryKey(productId);
+        return product;
+    }
+
+    @Override
+    public ProductShowOutDTO getShowById(Integer productId) {
 
         Product product = productMapper.selectByPrimaryKey(productId);
         ProductDetail productDetail = productDetailMapper.selectByPrimaryKey(productId);
@@ -48,17 +56,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<ProductListOutDTO> search(Integer pageNum) {
-        PageHelper.startPage(pageNum,10);
-        Page<ProductListOutDTO> page = productMapper.search();
-        return page;
-
-    }
-
-    //@Override
-   /* public Page<ProductListOutDTO> search(Integer pageNum) {
         PageHelper.startPage(pageNum, 10);
         Page<ProductListOutDTO> page = productMapper.search();
         return page;
-
-    }*/
+    }
 }
