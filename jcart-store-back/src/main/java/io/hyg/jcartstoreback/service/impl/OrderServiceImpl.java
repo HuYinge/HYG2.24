@@ -1,6 +1,8 @@
 package io.hyg.jcartstoreback.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import io.hyg.jcartstoreback.dao.OrderDetailMapper;
 import io.hyg.jcartstoreback.dao.OrderMapper;
 import io.hyg.jcartstoreback.dto.in.OrderCheckoutInDTO;
@@ -80,7 +82,7 @@ public class OrderServiceImpl implements OrderService{
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setOrderId(orderId);
         orderDetail.setShipMethod(orderCheckoutInDTO.getShipMethod());
-        //todo calculate ship price with ship method
+
         orderDetail.setShipPrice(5.0);
         Address shipAddress = addressService.getById(orderCheckoutInDTO.getShipAddressId());
         orderDetail.setShipAddress(shipAddress.getContent());
@@ -97,5 +99,13 @@ public class OrderServiceImpl implements OrderService{
         orderDetailMapper.insertSelective(orderDetail);
 
         return orderId;
+    }
+
+    @Override
+    public Page<Order> getByCustomerId(Integer pageNum, Integer customerId) {
+
+        PageHelper.startPage(pageNum,10);
+        Page<Order> page = orderMapper.selectByCustomerId(customerId);
+        return page;
     }
 }
