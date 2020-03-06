@@ -1,7 +1,6 @@
 package io.hyg.jcartadministrationback.controller;
 
 import com.github.pagehelper.Page;
-import io.hyg.jcartadministrationback.dao.AddressMapper;
 import io.hyg.jcartadministrationback.dto.in.CustomerSearchInDTO;
 import io.hyg.jcartadministrationback.dto.in.CustomerSetStatusInDTO;
 import io.hyg.jcartadministrationback.dto.out.CustomerListOutDTO;
