@@ -1,26 +1,85 @@
 package io.hyg.jcartadministrationback.controller;
 
+import com.github.pagehelper.Page;
+import io.hyg.jcartadministrationback.dao.AddressMapper;
 import io.hyg.jcartadministrationback.dto.in.CustomerSearchInDTO;
 import io.hyg.jcartadministrationback.dto.out.CustomerListOutDTO;
 import io.hyg.jcartadministrationback.dto.out.CustomerShowOutDTO;
 import io.hyg.jcartadministrationback.dto.out.PageOutDTO;
+import io.hyg.jcartadministrationback.po.Address;
+import io.hyg.jcartadministrationback.po.Customer;
+import io.hyg.jcartadministrationback.service.AddressService;
+import io.hyg.jcartadministrationback.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/customer")
+@CrossOrigin
 public class CustomerController {
+
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private AddressService addressService;
 
 
     @GetMapping("/search")
     public PageOutDTO<CustomerListOutDTO> search(CustomerSearchInDTO customerSearchInDTO,
-                                                 @RequestParam Integer pageNum){
-        return null;
-    }
+                                                 @RequestParam(required = false,defaultValue = "1") Integer pageNum) {
 
+        Page<Customer> page = customerService.search(pageNum);
+        List<CustomerListOutDTO> customerListOutDTOS = page.stream().map(customer -> {
+
+            CustomerListOutDTO customerListOutDTO = new CustomerListOutDTO();
+            customerListOutDTO.setCustomerId(customer.getCustomerId());
+            customerListOutDTO.setUsername(customer.getUsername());
+            customerListOutDTO.setRealName(customer.getRealName());
+            customerListOutDTO.setMobile(customer.getMobile());
+            customerListOutDTO.setEmail(customer.getEmail());
+            customerListOutDTO.setStatus(customer.getStatus());
+            customerListOutDTO.setCreateTimestamp(customer.getCreateTime().getTime());
+            return customerListOutDTO;
+        }).collect(Collectors.toList());
+
+        PageOutDTO<CustomerListOutDTO> pageOutDTO = new PageOutDTO<>();
+
+        pageOutDTO.setTotal(page.getTotal());
+        pageOutDTO.setPageSize(page.getPageSize());
+        pageOutDTO.setPageNum(page.getPageNum());
+        pageOutDTO.setList(customerListOutDTOS);
+
+        return pageOutDTO;
+    }
 //回显
     @GetMapping("/getById")
     public CustomerShowOutDTO getById(@RequestParam Integer customerId){
-        return null;
+
+        Customer customer = customerService.getById(customerId);
+        CustomerShowOutDTO customerShowOutDTO = new CustomerShowOutDTO();
+        customerShowOutDTO.setCustomerId(customerId);
+        customerShowOutDTO.setUsername(customer.getUsername());
+        customerShowOutDTO.setRealName(customer.getRealName());
+        customerShowOutDTO.setMobile(customer.getMobile());
+        customerShowOutDTO.setEmail(customer.getEmail());
+        customerShowOutDTO.setAvatarUrl(customer.getAvatarUrl());
+        customerShowOutDTO.setStatus(customer.getStatus());
+        customerShowOutDTO.setRewordPoints(customer.getRewordPoints());
+        customerShowOutDTO.setNewsSubscribed(customer.getNewsSubscribed());
+        customerShowOutDTO.setDefaultAddressId(customer.getDefaultAddressId());
+
+        Address defaultAddress = addressService.getById(customer.getDefaultAddressId());
+
+        if (defaultAddress != null){
+            customerShowOutDTO.setDefaultAddress(defaultAddress.getContent());
+        }
+
+
+        return customerShowOutDTO;
     }
 
 

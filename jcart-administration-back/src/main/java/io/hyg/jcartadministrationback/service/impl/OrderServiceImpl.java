@@ -5,6 +5,10 @@ import com.github.pagehelper.PageHelper;
 import io.hyg.jcartadministrationback.dao.OrderDetailMapper;
 import io.hyg.jcartadministrationback.dao.OrderMapper;
 import io.hyg.jcartadministrationback.dto.out.OrderListOutDTO;
+import io.hyg.jcartadministrationback.dto.out.OrderShowOutDTO;
+import io.hyg.jcartadministrationback.po.Customer;
+import io.hyg.jcartadministrationback.po.Order;
+import io.hyg.jcartadministrationback.po.OrderDetail;
 import io.hyg.jcartadministrationback.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
+
+
     @Override
     public Page<OrderListOutDTO> search(Integer pageNum) {
 
@@ -24,5 +30,18 @@ public class OrderServiceImpl implements OrderService {
         Page<OrderListOutDTO> page = orderMapper.search();
 
         return page;
+    }
+
+    @Override
+    public OrderShowOutDTO getById(Long orderId) {
+
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        OrderDetail orderDetail = orderDetailMapper.selectByPrimaryKey(orderId);
+
+        OrderShowOutDTO orderShowOutDTO = new OrderShowOutDTO();
+        orderShowOutDTO.setOrderId(orderId);
+        orderShowOutDTO.setCustomerId(order.getCustomerId());
+
+        return null;
     }
 }

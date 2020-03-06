@@ -10,6 +10,14 @@ public class PageOutDTO<T> {
     private List<T> list;
 
 
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
+
     public Integer getPageSize() {
         return pageSize;
     }
@@ -32,13 +40,5 @@ public class PageOutDTO<T> {
 
     public void setList(List<T> list) {
         this.list = list;
-    }
-
-    public Long getTotal() {
-        return total;
-    }
-
-    public void setTotal(Long total) {
-        this.total = total;
     }
 }
