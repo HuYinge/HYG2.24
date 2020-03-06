@@ -70,4 +70,9 @@ public class OrderServiceImpl implements OrderService {
 
         return orderShowOutDTO;
     }
+
+    @Override
+    public void update(Order order) {
+        orderMapper.updateByPrimaryKeySelective(order);
+    }
 }
