@@ -3,6 +3,7 @@ package io.hyg.jcartadministrationback.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.hyg.jcartadministrationback.dao.CustomerMapper;
+import io.hyg.jcartadministrationback.dto.in.CustomerSetStatusInDTO;
 import io.hyg.jcartadministrationback.po.Customer;
 import io.hyg.jcartadministrationback.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,13 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerMapper.selectByPrimaryKey(customerId);
 
         return customer;
+    }
+
+    @Override
+    public void setStatus(CustomerSetStatusInDTO customerSetStatusInDTO) {
+        Customer customer = new Customer();
+        customer.setCustomerId(customerSetStatusInDTO.getCustomerId());
+        customer.setStatus(customerSetStatusInDTO.getStatus());
+        customerMapper.updateByPrimaryKeySelective(customer);
     }
 }

@@ -1,6 +1,7 @@
 package io.hyg.jcartadministrationback.service;
 
 import com.github.pagehelper.Page;
+import io.hyg.jcartadministrationback.dto.in.CustomerSetStatusInDTO;
 import io.hyg.jcartadministrationback.po.Customer;
 
 public interface CustomerService {
@@ -10,5 +11,6 @@ public interface CustomerService {
      Customer getById(Integer customerId);
 
 
+     void setStatus(CustomerSetStatusInDTO customerSetStatusInDTO);
 
 }

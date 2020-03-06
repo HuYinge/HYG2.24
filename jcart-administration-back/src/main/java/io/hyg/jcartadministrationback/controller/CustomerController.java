@@ -3,6 +3,7 @@ package io.hyg.jcartadministrationback.controller;
 import com.github.pagehelper.Page;
 import io.hyg.jcartadministrationback.dao.AddressMapper;
 import io.hyg.jcartadministrationback.dto.in.CustomerSearchInDTO;
+import io.hyg.jcartadministrationback.dto.in.CustomerSetStatusInDTO;
 import io.hyg.jcartadministrationback.dto.out.CustomerListOutDTO;
 import io.hyg.jcartadministrationback.dto.out.CustomerShowOutDTO;
 import io.hyg.jcartadministrationback.dto.out.PageOutDTO;
@@ -55,6 +56,7 @@ public class CustomerController {
 
         return pageOutDTO;
     }
+
 //回显
     @GetMapping("/getById")
     public CustomerShowOutDTO getById(@RequestParam Integer customerId){
@@ -84,9 +86,9 @@ public class CustomerController {
 
 
     //创建和添加
-    @PostMapping("/disable")
-    public void disable(@RequestParam Integer customerId){
-
+    @PostMapping("/setStatus")
+    public void setStatus(@RequestBody CustomerSetStatusInDTO customerSetStatusInDTO){
+        customerService.setStatus(customerSetStatusInDTO);
     }
 
 
