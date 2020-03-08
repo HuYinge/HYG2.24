@@ -1,7 +1,11 @@
 package io.hyg.jcartstoreback.dao;
 
 import io.hyg.jcartstoreback.po.ReturnHistory;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface ReturnHistoryMapper {
 
     int deleteByPrimaryKey(Long returnHistoryId);
@@ -15,4 +19,8 @@ public interface ReturnHistoryMapper {
     int updateByPrimaryKeySelective(ReturnHistory record);
 
     int updateByPrimaryKey(ReturnHistory record);
+
+    //    custom
+
+    List<ReturnHistory> selectByReturnId(@Param("returnId") Integer returnId);
 }
