@@ -21,4 +21,12 @@ public class ReturnServiceImpl implements ReturnService {
         return returnId;
     }
 
+
+    @Override
+    public Page<Return> getPageByCustomerId(Integer customerId, Integer pageNum) {
+        PageHelper.startPage(pageNum, 10);
+        Page<Return> page = returnMapper.selectPageByCustomerId(customerId);
+        return page;
+    }
+
 }
