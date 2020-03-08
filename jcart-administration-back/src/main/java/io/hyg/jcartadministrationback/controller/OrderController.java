@@ -5,13 +5,11 @@ import io.hyg.jcartadministrationback.dto.in.OrderSearchInDTO;
 import io.hyg.jcartadministrationback.dto.out.*;
 import io.hyg.jcartadministrationback.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/order")
+@CrossOrigin
 public class OrderController {
     @Autowired
     private OrderService orderService;
