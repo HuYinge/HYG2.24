@@ -1,0 +1,9 @@
+package io.hyg.jcartadministrationback.service;
+
+import com.github.pagehelper.Page;
+import io.hyg.jcartadministrationback.po.Return;
+
+public interface ReturnService {
+
+    Page<Return> search(Integer pageNum);
+}
