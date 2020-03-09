@@ -11,6 +11,8 @@ public interface AdministratorService {
 
     Administrator getByUsername(String username);
 
+
+
     void update(Administrator administrator);
 
     void delete(Integer administratorId);
@@ -19,6 +21,8 @@ public interface AdministratorService {
 
     Page<Administrator> getList(Integer pageNum);
 
+    Administrator getByEmail(String email);
 
     Integer create(Administrator administrator);
+
 }
