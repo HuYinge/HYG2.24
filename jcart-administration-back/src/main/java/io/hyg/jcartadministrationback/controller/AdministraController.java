@@ -11,10 +11,17 @@ import io.hyg.jcartadministrationback.po.Administrator;
 import io.hyg.jcartadministrationback.service.AdministratorService;
 import io.hyg.jcartadministrationback.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.DatatypeConverter;
+import java.security.SecureRandom;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,6 +34,18 @@ public class AdministraController {
 
     @Autowired
     private JWTUtil jwtUtil;
+
+    @Autowired
+    private SecureRandom secureRandom;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    private Map<String,String> emailPwdResetCodeMap = new HashMap<>();
+
+
+    @Value("${spring.mail.username}")
+    private String fromEmail;
 
 
     @GetMapping("/login")
@@ -79,12 +98,19 @@ public class AdministraController {
 
 
     @GetMapping("/getPwdResetCode")
-    public String getPwdResetCode(@RequestParam String email){
+    public void getPwdResetCode(@RequestParam String email) throws ClientException {
 
-
-        return null;
+        byte[] bytes = secureRandom.generateSeed(3);
+        String hex = DatatypeConverter.printHexBinary(bytes);
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail);
+        message.setTo(email);
+        message.setSubject("jcart管理端管理员密码重置");
+        message.setText(hex);
+        mailSender.send(message);
+        //todo send messasge to MQ
+        emailPwdResetCodeMap.put(email, hex);
     }
-
 
     @PostMapping("/resetPwd")
     public void resetPwd(@RequestBody AdministratorResetPwdInDTO administratorResetPwdInDTO){
