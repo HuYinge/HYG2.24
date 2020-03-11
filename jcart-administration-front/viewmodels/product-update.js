@@ -152,6 +152,10 @@ var app = new Vue({
                     app.productAbstract = product.productAbstract;
                     app.description = product.description;
                     app.otherPicUrls = product.otherPicUrls;
+                    tinymce.init({
+                        selector: '#mytextarea'
+                    });
+                    app.otherPicUrls = product.otherPicUrls;
                 })
                 .catch(function (error) {
                     console.log(error);
