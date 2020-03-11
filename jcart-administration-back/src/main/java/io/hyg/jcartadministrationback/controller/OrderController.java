@@ -16,9 +16,9 @@ public class OrderController {
 
     @GetMapping("/search")
     public PageOutDTO<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO,
-                                              @RequestParam(required = false,defaultValue ="1") Integer pageNum){
+                                              @RequestParam(required = false, defaultValue = "1") Integer pageNum) {
+        Page<OrderListOutDTO> page = orderService.search(orderSearchInDTO, pageNum);
 
-        Page<OrderListOutDTO> page = orderService.search(pageNum);
         PageOutDTO<OrderListOutDTO> pageOutDTO = new PageOutDTO<>();
         pageOutDTO.setTotal(page.getTotal());
         pageOutDTO.setPageSize(page.getPageSize());
@@ -27,6 +27,7 @@ public class OrderController {
 
         return pageOutDTO;
     }
+
 
 
     @GetMapping("/getById")
