@@ -2,6 +2,7 @@ package io.hyg.jcartadministrationback.controller;
 
 import io.hyg.jcartadministrationback.constant.ClientExceptionConstant;
 import io.hyg.jcartadministrationback.exception.ClientException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +16,11 @@ import java.util.UUID;
 @RequestMapping("/image")
 @CrossOrigin
 public class ImageControler {
+
+    @Value("${www.image.baseurl}")
+    private String imageBaseurl;
+
+
     private List<String> imageExts= Arrays.asList("jpg","jpeg","png");
 
     @PostMapping("/upload")
@@ -35,6 +41,6 @@ public class ImageControler {
             byte[] data = image.getBytes();
             out.write(data);
         }
-        return filename;
+        return  imageBaseurl + "/" + filename;
     }
 }
